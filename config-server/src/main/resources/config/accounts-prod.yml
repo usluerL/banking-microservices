@@ -1,0 +1,13 @@
+accounts:
+  msg: Welcome to the Byusluer Banking App
+  build:
+    version:3
+  mailDetails:
+    hostName: byusluer-banking@internatiol.com
+    port: 9010
+    from: prod-accounts@byusluer-banking.com
+    subject: Your Account Details Byusluer Banking -prod
+  activeBranches:
+    - Istanbul_prod
+    - Ankara_prod
+    - Antalya_prod

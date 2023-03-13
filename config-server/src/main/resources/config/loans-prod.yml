@@ -1,0 +1,13 @@
+loans:
+  msg: Welcome to the Byusluer Banking Loans_Prod Service
+  build:
+    version:3
+  mailDetails:
+    hostName: byusluer-banking_loans_service_prod@internatiol.com
+    port: 9025
+    from: loanss_prod@byusluer-banking.com
+    subject: Your Card Details Byusluer Banking -prod
+  activeBranches:
+    - Istanbul
+    - Ankara
+    - Anta

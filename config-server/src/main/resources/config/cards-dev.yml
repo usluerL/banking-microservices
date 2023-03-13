@@ -1,0 +1,13 @@
+cards:
+  msg: Welcome to the Byusluer Banking Cards Dev Service
+  build:
+    version:3
+  mailDetails:
+    hostName: byusluer-banking_dev@internatiol.com
+    port: 9022
+    from: dev-accounts@byusluer-banking.com
+    subject: Your Card Details Byusluer Banking -dev
+  activeBranches:
+    - Istanbul
+    - Ankara
+    - Antalya
