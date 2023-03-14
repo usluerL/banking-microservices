@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   config-server:
-    image: byusluer/config-server
+    image: byusluer/account-service
     ports:
       - "8071:8071"
     networks:
@@ -21,7 +21,7 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      SPRING_PROFILES_ACTIVE: default
+      SPRING_PROFILES_ACTIVE: dev
       SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
   loan-service:
     image: byusluer/loan-service
@@ -38,7 +38,7 @@ services:
           max_attempts: 3
           window: 120s
     environment:
-        SPRING_PROFILES_ACTIVE: default
+        SPRING_PROFILES_ACTIVE: dev
         SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
   card-service:
     image: byusluer/card-service
@@ -55,7 +55,7 @@ services:
           max_attempts: 3
           window: 120s
     environment:
-       SPRING_PROFILES_ACTIVE: default
+       SPRING_PROFILES_ACTIVE: dev
        SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
 networks:
   byusluer-network:
