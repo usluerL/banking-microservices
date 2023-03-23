@@ -1,17 +1,17 @@
 version: "3.8"
 services:
   config-server:
-    image: byusluer/account-service
+    image: byusluer/config-server
     ports:
       - "8071:8071"
     networks:
       - byusluer-network
-  account-service:
-    image: byusluer/account-service
+  eureka-server:
+    image: byusluer/eureka-server
     ports:
-      - "8080:8080"
+      - "8070:8070"
     networks:
-     - byusluer-network
+      - byusluer-network
     depends_on:
       - config-server
     deploy:
@@ -23,6 +23,25 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: dev
       SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
+  account-service:
+    image: byusluer/account-service
+    ports:
+      - "8080:8080"
+    networks:
+      - byusluer-network
+    depends_on:
+      - config-server
+      - eureka-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8070/eureka
   loan-service:
     image: byusluer/loan-service
     ports:
@@ -31,15 +50,17 @@ services:
       - byusluer-network
     depends_on:
       - config-server
+      - eureka-server
     deploy:
-        restart_policy:
-          condition: on-failure
-          delay: 5s
-          max_attempts: 3
-          window: 120s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     environment:
-        SPRING_PROFILES_ACTIVE: dev
-        SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8070/eureka
   card-service:
     image: byusluer/card-service
     ports:
@@ -48,14 +69,16 @@ services:
       - byusluer-network
     depends_on:
       - config-server
+      - eureka-server
     deploy:
-        restart_policy:
-          condition: on-failure
-          delay: 5s
-          max_attempts: 3
-          window: 120s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     environment:
-       SPRING_PROFILES_ACTIVE: dev
-       SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_CONFIG_IMPORT: configserver:http://config-server:8071
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8070/eureka
 networks:
   byusluer-network:
