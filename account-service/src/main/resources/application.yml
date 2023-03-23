@@ -15,7 +15,7 @@ spring:
   config:
     import: optional:configserver:http://localhost:8071
   profiles:
-    active: prod
+    active: dev
 management:
   endpoints:
     web:
