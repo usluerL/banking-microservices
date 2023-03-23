@@ -13,5 +13,5 @@ spring:
           uri: https://github.com/usluerL/banking-micro-config
           clone-on-start: true
           default-label: main
-
-
+encrypt:
+  key: merdumgirizraven
