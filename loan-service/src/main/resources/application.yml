@@ -18,8 +18,34 @@ spring:
   profiles:
     active: dev
 
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8070/eureka/
+
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: Loan MicroService
+    description:   Loan Ws Application
+    version: 1.0.0
+endpoints:
+  shutdown:
+    enabled: true
+
+
+
